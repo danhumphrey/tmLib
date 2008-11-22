@@ -18,15 +18,17 @@
  */
 class FrontController
 {
-	private $mapper;
+	private $mappers = array();
 	
     /**
      * Constructs the FrontController
      *
-     * @param BaseRequestMapper $mapper a request mapper that extends BaseRequestMapper
+     * @param BaseRequestMapper $mapper a request mapper that extends BaseRequestMapper. Multiple mapper arguments can be passed to provide a chain of mappers.
      */
     function FrontController($mapper) {
-    	$this->mapper = $mapper;
+    	for ($i = 0;$i < func_num_args();$i++) {
+    		$this->mappers[] = func_get_arg($i);
+    	}
     }
 
     /**
@@ -37,10 +39,12 @@ class FrontController
      * @return bool whether execution was successful
      */
     function execute($request, $response) {
-    	if($dispatch = $this->mapper->mapRequest($request)){
-	    	if (method_exists($dispatch, 'execute')) {
-	    		$dispatch->execute($request, $response);
-	    		return true;
+    	foreach($this->mappers as $mapper) {
+	    	if($dispatch = $mapper->mapRequest($request)){
+		    	if (method_exists($dispatch, 'execute')) {
+		    		$dispatch->execute($request, $response);
+		    		return true;
+		    	}
 	    	}
     	}
     }

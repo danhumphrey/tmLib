@@ -1,15 +1,7 @@
 <?php
-if (! defined('SIMPLE_TEST')) {
-        define('SIMPLE_TEST', 'C:\\Users\\Dan\\dev\\simpletest\\');
-}
-require_once(SIMPLE_TEST . 'unit_tester.php');
-require_once(SIMPLE_TEST . 'reporter.php');
-require_once(SIMPLE_TEST . 'web_tester.php');
-require_once(SIMPLE_TEST . 'mock_objects.php');
-require_once('show_passes.php');
+//tests includes
+require_once('test-includes.php');
 
-//main tmLib includes file
-require_once('../includes.php');
 
 class TestOfHttpResponse extends WebTestCase {
 	function __construct() {
@@ -45,14 +37,14 @@ class TestOfHttpResponse extends WebTestCase {
 		$this->assertEqual($content,$res->execute());
 	}
 	function testExecuteHeaders() {
-		$this->get('web_test_http_response_headers.php');
+		$this->get('http://127.0.0.1/tmLib/tests/web_test_http_response_headers.php');
 		$this->assertText('Test HttpResponse header');
 		$this->assertHeader('Cache-Control', 'no-cache, must-revalidate');
 		$this->assertHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
 	}
 	function testExecuteRedirect() {
 		$this->setMaximumRedirects(0);
-		$this->get('http://localhost/tmLib/tests/web_test_http_response_redirect.php');
+		$this->get('http://127.0.0.1//tmLib//tests//web_test_http_response_redirect.php');
 		$this->assertResponse(array(301, 302, 303, 307));
 	}
 }

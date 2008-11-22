@@ -1,4 +1,6 @@
 <?php
+//tests includes
+require_once('test-includes.php');
 
 class Person {
 	private $name;

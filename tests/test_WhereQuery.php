@@ -1,5 +1,8 @@
 <?php
 
+//tests includes
+require_once('test-includes.php');
+
 class TestWhereQuery extends TmWhereQuery {
 	function __construct($db) {
 		parent::__construct($db);
