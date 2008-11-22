@@ -1,5 +1,8 @@
 <?php
 
+//tests includes
+require_once('test-includes.php');
+
 class TestOfUpdateQuery extends UnitTestCase  {
 	
 	/**

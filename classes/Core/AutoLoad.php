@@ -16,7 +16,7 @@
  * @author Dan Humphrey <dan.humphrey@technomedia.co.uk>
  * @access public
  * @static
- * @version 1.0
+ * @version 1.1
  */
 class AutoLoad {
 
@@ -85,11 +85,7 @@ class AutoLoad {
 
 		//try file system
 		$matches = self::getFileNameMatches($className);
-		/*
-		if(sizeof(self::$classPaths) == 0) {
-			$classPaths[] = dirname(__FILE__);
-		}
-		*/
+		
 		foreach (self::$classPaths as $classPath) {
 			if($file = self::findFile($matches, $classPath)){
 				require_once($file);

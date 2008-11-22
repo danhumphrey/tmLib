@@ -1,23 +1,13 @@
 <?php
-	if (! defined('SIMPLE_TEST')) {
-        define('SIMPLE_TEST', 'C:\\Users\\Dan\\dev\\simpletest\\');
-    }
+	
+	//tests includes
+	require_once('test-includes.php');
     
 	/**
 	 * TODO:Group tests and check coverage
 	 * @todo extract loading to external loader
 	 */
-    require_once(SIMPLE_TEST . 'unit_tester.php');
-    require_once(SIMPLE_TEST . 'reporter.php');
-    require_once(SIMPLE_TEST . 'web_tester.php');
-    require_once(SIMPLE_TEST . 'mock_objects.php');
-	
-	require_once('show_passes.php');
-	require_once('my_reporter.php');
-	
-    //main tmLib includes file
-    require_once('../includes.php');
- 
+    
     $test = new GroupTest('All tmLib tests');
     
     $test->addTestFile('test_Auth.php');
@@ -45,6 +35,7 @@
     $test->addTestFile('test_Session.php');
     $test->addTestFile('test_View.php');
     
+    //*
     $test->addTestFile('test_DeleteQuery.php');
    	$test->addTestFile('test_InsertQuery.php');
     $test->addTestFile('test_PdoDb.php');
@@ -56,12 +47,12 @@
    	$test->addTestFile('test_SubSelectQuery.php'); 
     $test->addTestFile('test_UpdateQuery.php');
     $test->addTestFile('test_WhereQuery.php');
-    
+   
     $test->addTestFile('../tests/test_Orm.php');
    	$test->addTestFile('../tests/test_OrmAnnotationParser.php');
    	$test->addTestFile('../tests/test_OrmDefinition.php');
    	$test->addTestFile('../tests/test_OrmObject.php');
-   	
+   	// */	
     //run
     if(isset($_GET['showpasses']))
 	{

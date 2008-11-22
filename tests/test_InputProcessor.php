@@ -1,15 +1,7 @@
 <?php
-if (! defined('SIMPLE_TEST')) {
-	define('SIMPLE_TEST', 'C:\\web\\simpletest\\');
-}
-require_once(SIMPLE_TEST . 'unit_tester.php');
-require_once(SIMPLE_TEST . 'reporter.php');
-require_once(SIMPLE_TEST . 'web_tester.php');
-require_once(SIMPLE_TEST . 'mock_objects.php');
-require_once('show_passes.php');
+//tests includes
+require_once('test-includes.php');
 
-//main tmLib includes file
-require_once('../includes.php');
 
 class TestInputCommand extends BaseCommand implements ICommandState{
 	protected $inputProcessor;
@@ -47,7 +39,7 @@ class TestOfInputProcessor extends UnitTestCase {
 	{
 		$this->cmd = new MockTestInputCommand();
 		$this->ds = new MockDataSet();
-		$this->fieldDefPath = SITE_PATH.DIRSEP.'tmLib'.DIRSEP.'tests'.DIRSEP.'temp'.DIRSEP.'FieldDefinitions'.DIRSEP;
+		$this->fieldDefPath = SITE_PATH.'tmLib'.DIRSEP.'tests'.DIRSEP.'temp'.DIRSEP.'FieldDefinitions'.DIRSEP;
 		if(!file_exists($this->fieldDefPath)){
 			mkdir($this->fieldDefPath);
 		}

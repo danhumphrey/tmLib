@@ -1,5 +1,8 @@
 <?php
 
+//tests includes
+require_once('test-includes.php');
+
 Mock::generate('TmSelectQuery');
 
 class TestOfSubSelectQuery extends UnitTestCase  {

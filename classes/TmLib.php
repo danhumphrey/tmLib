@@ -22,7 +22,7 @@ class TmLib {
 	 */
 	static function init() {
 		$dirBase = dirname(__FILE__);
-		define('TMLIB_PATH', $dirBase);
+		//define('TMLIB_PATH', $dirBase);
 		require_once ('Core/AutoLoad.php');
 		AutoLoad::addClassPath($dirBase);
 	}

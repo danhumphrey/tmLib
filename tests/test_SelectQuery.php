@@ -1,4 +1,7 @@
 <?php
+//tests includes
+require_once('test-includes.php');
+
 class TestOfSelectQuery extends UnitTestCase  {
 	
 	/**
