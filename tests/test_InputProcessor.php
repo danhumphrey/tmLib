@@ -115,10 +115,10 @@ class TestOfInputProcessor extends UnitTestCase {
 	function tearDown() {
 
 		if(file_exists($this->fieldDefFile)) {
-			unlink($this->fieldDefFile);
+			$res = unlink($this->fieldDefFile);
 		}		
 		if(file_exists($this->fieldDefPath)) {
-			rmdir($this->fieldDefPath);
+			$res = rmdir($this->fieldDefPath);
 		}
 		unset($this->ds);
 	}

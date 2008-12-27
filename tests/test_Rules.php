@@ -87,7 +87,8 @@ class TestOfRules extends UnitTestCase {
 	function testConditionalRequiredRuleReturnsTrueWhenConditionMetAndPasses() {
 		$this->ds->setReturnValue('get','barValue',array('bar'));
 		$this->ds->setReturnValue('get','fooValue',array('foo'));
-		$rule = new ConditionalRequiredRule('foo', 'foo is required', 'bar');
+		$rule = new ConditionalRequiredRule('foo is required', 'bar');
+		$rule->setFieldName('foo');
 		$this->ds->expectNever('set');
 		$this->assertTrue($rule->process($this->ds));
 		$this->ds->tally();

@@ -15,7 +15,8 @@ class TestOfFilters extends UnitTestCase {
 	}
 	function testTrimFilter() {
 		//null
-		$filter = new TrimFilter('foo');
+		$filter = new TrimFilter();
+		$filter->setFieldName('foo');
 		$this->ds->setReturnValue('get', ' foo with spaces ', array('foo'));
 		$this->ds->expectOnce('set',array('foo','foo with spaces',));
 		$filter->process($this->ds);
@@ -32,7 +33,8 @@ class TestOfFilters extends UnitTestCase {
 	}
 	function testConcatFilterDefaultConcatenator() {
 		//null
-		$filter = new ConcatFilter('newField',array('field1', 'field2'));
+		$filter = new ConcatFilter(array('field1', 'field2'));
+		$filter->setFieldName('newField');
 		$this->ds->setReturnValue('get', 'value1', array('field1'));
 		$this->ds->setReturnValue('get', 'value2', array('field2'));
 		$this->ds->expectOnce('set',array('newField','value1value2',));
@@ -41,7 +43,8 @@ class TestOfFilters extends UnitTestCase {
 	}
 	function testConcatFilterCustomConcatenator() {
 		//null
-		$filter = new ConcatFilter('newField',array('field1', 'field2', 'field3'),'-');
+		$filter = new ConcatFilter(array('field1', 'field2', 'field3'),'-');
+		$filter->setFieldName('newField');
 		$this->ds->setReturnValue('get', 'value1', array('field1'));
 		$this->ds->setReturnValue('get', 'value2', array('field2'));
 		$this->ds->setReturnValue('get', 'value3', array('field3'));
@@ -51,7 +54,8 @@ class TestOfFilters extends UnitTestCase {
 	}
 	
 	function testStripTagsFilter() {
-		$filter = new StripTagsFilter('foo');
+		$filter = new StripTagsFilter();
+		$filter->setFieldName('foo');
 		$this->ds->setReturnValue('get','<b>some text</b><br/> <script language="JavaScript>doSomething()</script>');
 		$this->ds->expectOnce('set',array('foo','some text doSomething()',));
 		$filter->process($this->ds);

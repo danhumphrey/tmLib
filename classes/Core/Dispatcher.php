@@ -1,6 +1,6 @@
 <?php
 /**
-  * FrontController class
+  * Dispatcher class
   *
   * @package tmLib
   * @subpackage Core
@@ -8,7 +8,7 @@
   */
 
 /**
- * FrontController class for mapping and dispatching request commands to a RequestHandler
+ * Dispatcher class for mapping and dispatching request commands to a RequestHandler
  *
  * @package tmLib
  * @subpackage Core
@@ -16,23 +16,23 @@
  * @access public
  * @version 1.0
  */
-class FrontController
+class Dispatcher
 {
 	private $mappers = array();
 	
     /**
-     * Constructs the FrontController
+     * Constructs the Dispatcher
      *
      * @param BaseRequestMapper $mapper a request mapper that extends BaseRequestMapper. Multiple mapper arguments can be passed to provide a chain of mappers.
      */
-    function FrontController($mapper) {
+    function Dispatcher($mapper) {
     	for ($i = 0;$i < func_num_args();$i++) {
     		$this->mappers[] = func_get_arg($i);
     	}
     }
 
     /**
-     * Executes the FrontController
+     * Executes the Dispatcher
      *
      * @param HttpRequest $request a HttpRequest object
      * @param HttpResponse $response a HttpResponse object

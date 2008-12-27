@@ -28,10 +28,10 @@ class TestOfPageMapper extends UnitTestCase {
 	function tearDown() 
 	{
 		if(file_exists($this->validPageFile)){
-			unlink($this->validPageFile);
+			$res = unlink($this->validPageFile);
 		}
 		if(file_exists($this->pagePath)){
-			rmdir($this->pagePath);
+			$res = rmdir($this->pagePath);
 		}	
 		$this->req = null;
 	}
