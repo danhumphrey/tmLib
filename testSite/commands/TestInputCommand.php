@@ -9,8 +9,8 @@ class TestInputCommand extends AuthorizedCommand implements ICommandState{
 		//-name
 		$name = new InputField('name');
 		$name->addFilter(new TrimFilter());
-		$name->addFilter(new ConcatFilter('newField', array('field1', 'field2')));
-		$name->addRule(new RequiredRule('the name is required'));
+		$name->addFilter(new ConcatFilter('name', array('field1', 'field2')));
+		$name->addRule(new RequiredRule('the name field is required'));
 		$this->inputProcessor->addField($name);
 	}
 	

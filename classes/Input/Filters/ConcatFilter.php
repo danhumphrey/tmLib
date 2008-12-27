@@ -28,8 +28,8 @@ class ConcatFilter extends BaseFilter{
      * @param array $fields the existing fields in the order of concatenation
      * @param string $concatenator (optional) a token to concatenate between each field
      */
-	function __construct($fieldName=null, array $fields, $concatenator = ''){
-		parent::__construct($fieldName);
+	function __construct(array $fields, $concatenator = ''){
+		parent::__construct();
 		$this->fields = $fields;
 		$this->concatenator = $concatenator;
 	}		

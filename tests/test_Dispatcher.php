@@ -18,7 +18,7 @@ Mock::generate('ServerPage');
 Mock::generate('PageMapper');
 Mock::generate('CommandMapper');
 
-class TestOfFrontController extends UnitTestCase {
+class TestOfDispatcher extends UnitTestCase {
 	private $req;
 	private $res;
 	private $cmd;
@@ -47,25 +47,25 @@ class TestOfFrontController extends UnitTestCase {
 	function __construct() {
 		parent::UnitTestCase();
 	}
-	function testFCReturnsFalseWhenNoServerPageFound() {
-		$fc = new FrontController($this->pageMapper);
+	function testDispatcherReturnsFalseWhenNoServerPageFound() {
+		$fc = new Dispatcher($this->pageMapper);
 		$this->pageMapper->setReturnValue('mapRequest','false');
 		$this->assertFalse($fc->execute($this->req, $this->res));
 	}
-	function testFCExecutesPageWhenServerPageFound() {
-		$fc = new FrontController($this->pageMapper);
+	function testDispatcherExecutesPageWhenServerPageFound() {
+		$fc = new Dispatcher($this->pageMapper);
 		$this->page->expectOnce('execute',array($this->req,$this->res));
 		$this->pageMapper->setReturnValue('mapRequest',$this->page);
 		$this->assertTrue($fc->execute($this->req, $this->res));
 		$this->page->tally();
 	}
-	function testFCReturnsFalseWhenNoCmdFound() {
-		$fc = new FrontController($this->cmdMapper);
+	function testDispatcherReturnsFalseWhenNoCmdFound() {
+		$fc = new Dispatcher($this->cmdMapper);
 		$this->cmdMapper->setReturnValue('mapRequest','false');
 		$this->assertFalse($fc->execute($this->req, $this->res));
 	}
-	function testFCExecutesPageWhenCmdFound() {
-		$fc = new FrontController($this->cmdMapper);
+	function testDispatcherExecutesPageWhenCmdFound() {
+		$fc = new Dispatcher($this->cmdMapper);
 		$this->cmd->expectOnce('execute',array($this->req,$this->res));
 		$this->cmdMapper->setReturnValue('mapRequest',$this->cmd);
 		$this->assertTrue($fc->execute($this->req, $this->res));
@@ -74,8 +74,8 @@ class TestOfFrontController extends UnitTestCase {
 }
 //run if standalone
 if(!isset($this)) {
-	$test = new GroupTest('TestOfFrontController');
-	$test->addTestCase(new TestOfFrontController);
+	$test = new GroupTest('TestOfDispatcher');
+	$test->addTestCase(new TestOfDispatcher);
 	if(isset($_GET['showpasses']))
 	{
 		$test->run(new ShowPasses());

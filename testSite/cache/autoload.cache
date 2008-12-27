@@ -1,3 +1,14 @@
 <?php
 //Auto Generated Cache File (tmLib AutoLoad)
+//To clear the cache, delete the array entries below:
+$tmLibAutoLoadCacheArray['Dispatcher'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Core\Dispatcher.php';
+$tmLibAutoLoadCacheArray['BaseRequestMapper'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\RequestMappers\BaseRequestMapper.php';
+$tmLibAutoLoadCacheArray['CommandMapper'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\RequestMappers\CommandMapper.php';
+$tmLibAutoLoadCacheArray['HttpResponse'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Http\HttpResponse.php';
+$tmLibAutoLoadCacheArray['IDataSet'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Core\IDataSet.php';
+$tmLibAutoLoadCacheArray['DataSet'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Core\DataSet.php';
+$tmLibAutoLoadCacheArray['HttpRequest'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Http\HttpRequest.php';
+$tmLibAutoLoadCacheArray['IRequestHandler'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\RequestMappers\IRequestHandler.php';
+$tmLibAutoLoadCacheArray['BaseCommand'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Commands\BaseCommand.php';
+//Do not delete below this line!
 ?>

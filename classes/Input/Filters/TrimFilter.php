@@ -23,8 +23,8 @@ class TrimFilter extends BaseFilter{
      * @access public
      * @param string $fieldName (optional) the field name of the request variable
      */
-	function __construct($fieldName=null){
-		parent::__construct($fieldName);
+	function __construct(){
+		parent::__construct();
 	}
 	
 	/**

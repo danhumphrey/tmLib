@@ -55,7 +55,7 @@ require_once('classes/Commands/ServerPage.php');
 
 //require_once('classes/Views/PhpTalView.php');
 
-require_once('classes/Core/FrontController.php');
+require_once('classes/Core/Dispatcher.php');
 
 //query abstraction
 require_once('classes/Database/TmPdoDb.php');

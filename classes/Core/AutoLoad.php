@@ -85,7 +85,7 @@ class AutoLoad {
 
 		//try file system
 		$matches = self::getFileNameMatches($className);
-		
+
 		foreach (self::$classPaths as $classPath) {
 			if($file = self::findFile($matches, $classPath)){
 				require_once($file);
@@ -107,12 +107,13 @@ class AutoLoad {
 		if(isset(self::$cacheFile) && self::$cacheUpdated) {
 			$header = '<?php' . "\n";
 			$header .= '//Auto Generated Cache File (tmLib AutoLoad)' ."\n";
+			$header .= '//To clear the cache, delete the array entries below:' ."\n";
 			$items = '';
 			foreach (self::$cache as $class => $path){
 				$items .= '$tmLibAutoLoadCacheArray' ."['$class'] = '$path';" ."\n";
 			}
-			$footer = '?>' ."\n";
-
+			$footer = '//Do not delete below this line!' ."\n";
+			$footer .= '?>' ."\n";
 			if($handle = fopen(self::$cacheFile,"w+")) {
 				fwrite($handle,$header);
 				fwrite($handle,$items);
@@ -134,7 +135,7 @@ class AutoLoad {
 		if(func_num_args() > 1) {
 			$startDir = func_get_arg(1);
 		}
-		
+
 		$subDirectories = array();
 		$dirIt = new DirectoryIterator($startDir);
 

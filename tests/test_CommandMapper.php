@@ -29,10 +29,10 @@ class TestOfCommandMapper extends UnitTestCase {
 	{
 	
 		if(file_exists($this->validCommandFile)){
-			unlink($this->validCommandFile);
+			$res = unlink($this->validCommandFile);
 		}
 		if(file_exists($this->commandPath)){
-			rmdir($this->commandPath);
+			$res = rmdir($this->commandPath);
 		}
 	}
 	function createValidCommandClass()

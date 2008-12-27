@@ -19,7 +19,7 @@
     $test->addTestFile('test_CommandMapper.php');
     $test->addTestFile('test_DataSet.php');
     $test->addTestFile('test_Filters.php');
-    $test->addTestFile('test_FrontController.php');
+    $test->addTestFile('test_Dispatcher.php');
     $test->addTestFile('test_HttpPathVars.php');
     $test->addTestFile('test_HttpRequest.php');
     $test->addTestFile('test_HttpResponse.php');

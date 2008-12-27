@@ -24,10 +24,7 @@ abstract class BaseFilter implements IInputProcessor{
      * @access public
      * @param string $fieldName (optional)  field name of the request variable that the filter will process
      */
-	function __construct($fieldName=null){
-		if($fieldName) {
-			$this->fieldName = $fieldName;
-		}
+	function __construct(){
 	}
 	
 	/**

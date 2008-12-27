@@ -23,8 +23,8 @@ class StripTagsFilter extends BaseFilter {
      * @access public
      * @param string $fieldName the field name of the request variable
      */
-	function __construct($fieldName){
-		parent::__construct($fieldName);
+	function __construct(){
+		parent::__construct();
 	}
 	
 	/**

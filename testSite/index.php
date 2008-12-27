@@ -1,9 +1,9 @@
 <?php
 require_once('inc.php');
 try {
-	$controller = new FrontController(new CommandMapper(CMD_PATH));
+	$dispatcher = new Dispatcher(new CommandMapper(CMD_PATH));
 	$response = new HttpResponse();
-	if(!$controller->execute(new HttpRequest(),$response)){
+	if(!$dispatcher->execute(new HttpRequest(),$response)){
 		//default command
 		$response->setContent('Default response - no command executed');
 	}
