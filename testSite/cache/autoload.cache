@@ -10,5 +10,16 @@ $tmLibAutoLoadCacheArray['DataSet'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\class
 $tmLibAutoLoadCacheArray['HttpRequest'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Http\HttpRequest.php';
 $tmLibAutoLoadCacheArray['IRequestHandler'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\RequestMappers\IRequestHandler.php';
 $tmLibAutoLoadCacheArray['BaseCommand'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Commands\BaseCommand.php';
+$tmLibAutoLoadCacheArray['AuthorizedCommand'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\AuthorizedCommand.php';
+$tmLibAutoLoadCacheArray['Registry'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Core\Registry.php';
+$tmLibAutoLoadCacheArray['Locator'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\Locator.php';
+$tmLibAutoLoadCacheArray['Session'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\Core\Session.php';
+$tmLibAutoLoadCacheArray['AuthDefinition'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\AccessControl\AuthDefinition.php';
+$tmLibAutoLoadCacheArray['Auth'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\AccessControl\Auth.php';
+$tmLibAutoLoadCacheArray['IAuthValidator'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\classes\AccessControl\IAuthValidator.php';
+$tmLibAutoLoadCacheArray['AuthUserValidator'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\AuthUserValidator.php';
+$tmLibAutoLoadCacheArray['AuthRequiredException'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\AuthRequiredException.php';
+$tmLibAutoLoadCacheArray['CurrentUser'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\CurrentUser.php';
+$tmLibAutoLoadCacheArray['PermissionRequiredException'] = 'C:\Users\dan\dev\xampp\htdocs\tmLib\testSite\classes\PermissionRequiredException.php';
 //Do not delete below this line!
 ?>
