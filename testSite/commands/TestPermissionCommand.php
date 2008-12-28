@@ -2,7 +2,7 @@
 class TestPermissionCommand extends AuthorizedCommand {
 	
 	function __construct() {
-		$this->perm = 'BASIC';
+		$this->perm = 'ADVANCED';
 	}
 	function execute($request, $response) {
 		if(parent::execute($request, $response)) {
