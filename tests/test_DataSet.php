@@ -39,6 +39,9 @@ class TestOfDataSet extends UnitTestCase  {
 	function testInvalidKeyContainsNullValue() {
 		$this->assertNull($this->ds->get('NullRubbish'));
 	}
+    function testInvalidKeyReturnsDefaultValueWhenUsed() {
+        $this->assertEqual($this->ds->get('NullRubbish',99),99);
+    }
 	function testGetDataReturnsArray() {
 		$this->assertEqual($this->ds->getData(), array());
 	}
