@@ -42,10 +42,11 @@ class ResultPager {
 		// Calculate the total number of pages
 		$this->totalPages=ceil($numRows/$rowsPerPage);
 		// Check that a valid page has been provided
-		if ( $currentPage < 1 )
-		$currentPage=1;
-		else if ( $currentPage > $this->totalPages )
-		$currentPage=$this->totalPages;
+		if ( $currentPage < 1 ){
+		  $currentPage=1;
+		}else if ( $currentPage > $this->totalPages ){
+		  $currentPage=$this->totalPages;
+		}
 		// Calculate the row to start the select with
 		$this->startRow=(($currentPage - 1) * $rowsPerPage);
 
