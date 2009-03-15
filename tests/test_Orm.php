@@ -953,8 +953,7 @@ class TestOfOrm extends UnitTestCase  {
 		$q = $orm->createFindQuery('Article');
 		try {
 			$orm->deleteByQuery($q);
-		}catch(Exception $e)
-		{
+		}catch(Exception $e) {
 			if($e->getMessage() == "deleteByQuery expects a paramater of type 'TmDeleteQuery'")
 			{
 				$this->pass('Exception thrown as expected.');
