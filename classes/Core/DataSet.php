@@ -33,10 +33,11 @@ class DataSet implements IDataSet, ArrayAccess
 	 * Returns a variable from the dataset if it exists
 	 * @access public
 	 * @param string $key the name of the variable to retrieve
+	 * @param mixed $default the default value to return when the key is not in the dataset
 	 * @return mixed the value of the variable named $key or null if the variable
 	 */
-	function get($key) {
-		return $this->keyExists($key) ? $this->data[$key] : null;
+	function get($key,$default = null) {
+	   return $this->keyExists($key) ? $this->data[$key] : $default;
 	}
 	
 	/**
