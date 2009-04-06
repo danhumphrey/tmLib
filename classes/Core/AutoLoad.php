@@ -106,7 +106,7 @@ class AutoLoad {
 	private static function writeCache() {
 		if(isset(self::$cacheFile) && self::$cacheUpdated) {
 			$header = '<?php' . "\n";
-			$header .= '//Auto Generated Cache File (tmLib AutoLoad)' ."\n";
+			$header .= '//Auto Generated Cache File (for tmLib AutoLoad class)' ."\n";
 			$header .= '//To clear the cache, delete the array entries below:' ."\n";
 			$items = '';
 			foreach (self::$cache as $class => $path){
@@ -126,19 +126,14 @@ class AutoLoad {
 		return str_replace("@CLASS@", $classname, self::$filenameTemplates);
 	}
 
-	private static function findFile($file) {
+	private static function findFile($file, $startDir) {
 		// normalize
 		if(!is_array($file)) {
 			$file = array($file);
 		}
-		// recursion start dir
-		if(func_num_args() > 1) {
-			$startDir = func_get_arg(1);
-		}
-
+		
 		$subDirectories = array();
 		$dirIt = new DirectoryIterator($startDir);
-
 		foreach($dirIt as $dirItem) {
 			if($dirItem->isDot()) {
 				continue;
