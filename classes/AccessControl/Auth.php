@@ -84,9 +84,8 @@ class Auth {
     * @param string $login
     * @param string $password
     * @return void
-    * @access private
     */
-    private function storeAuth($login,$password) {
+    function storeAuth($login,$password) {
         $this->session->set($this->definition->getLoginVar(),$login);
         $password = $this->definition->useMd5() ? md5($password) : $password;
         $this->session->set($this->definition->getPasswordVar(),$password);
