@@ -38,7 +38,7 @@ class ClassWithoutColumnName{
 	 * @var int
 	 */
 	protected $id;
-	
+
 }
 
 /**
@@ -99,7 +99,7 @@ class ClassWithoutColumnType{
 	 * @var int
 	 */
 	protected $id;
-	
+
 	/**
 	 * The title
 	 * @TmOrmColumn(name=title)
@@ -403,7 +403,7 @@ class Article extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related category
 	 * @TmOrmColumn(name=category,type=int)
 	 */
 	protected $category;
@@ -431,7 +431,7 @@ class ArticleDiffColumnAndPropNames extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related category
 	 * @TmOrmColumn(name=category,type=int)
 	 */
 	protected $category;
@@ -457,7 +457,7 @@ class ArticleWithSingleCascade extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related category
 	 * @TmOrmColumn(name=category,type=int)
 	 */
 	protected $category;
@@ -483,7 +483,7 @@ class ArticleWithListCascade extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related category
 	 * @TmOrmColumn(name=category,type=int)
 	 */
 	protected $category;
@@ -508,7 +508,7 @@ class ArticleWithLookupCascade extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related category
 	 * @TmOrmColumn(name=category,type=int)
 	 */
 	protected $category;
@@ -533,7 +533,7 @@ class Category extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The category name
 	 * @TmOrmColumn(name=name,type=string)
 	 */
 	protected $name;
@@ -553,13 +553,13 @@ class Comment extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The related article
 	 * @TmOrmColumn(name=article,type=int)
 	 */
 	protected $article;
-	
+
 	/**
-	 * The title
+	 * The comment
 	 * @TmOrmColumn(name=comment,type=string)
 	 */
 	protected $comment;
@@ -579,7 +579,7 @@ class Tag extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The tag name
 	 * @TmOrmColumn(name=name,type=string)
 	 */
 	protected $name;
@@ -599,7 +599,7 @@ class Dummy extends OrmObject {
 	protected $id;
 
 	/**
-	 * The title
+	 * The name
 	 * @TmOrmColumn(name=name,type=string)
 	 */
 	protected $name;
