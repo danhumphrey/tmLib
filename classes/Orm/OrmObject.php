@@ -37,7 +37,7 @@ class OrmObject {
 	 * @magic function
 	 * @param string $name the function name
 	 * @param mixed $args the arguments to pass to the function
-	 * @return mixed the value of the property if a 'get' method is called
+	 * @return mixed the value of the property if a 'get' method is called or $this for method chaining if a 'set' method
 	 */
 	public function __call($name, $args) {
 		if(preg_match('/^(get|set)(\w+)/',strtolower($name), $match) && $attribute = $this->validateAttribute($match[2])) {
@@ -45,6 +45,7 @@ class OrmObject {
 				return $this->$attribute;
 			} else {
 				$this->$attribute = $args[0];
+				return $this;
 			}
 		}
 	}

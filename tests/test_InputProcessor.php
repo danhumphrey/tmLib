@@ -53,47 +53,6 @@ class TestOfInputProcessor extends UnitTestCase {
 	}
 	
 	function createDefFile() {
-		/*
-		$out = '$def'."=array \n";
-		$out.= "( \n";
-		$out.= "	'field1'=>array \n";
-		$out.= "	( \n";
-		$out.= "		'name'=>'field1', \n";
-		$out.= "		'filters'=>array \n";
-		$out.= "		( \n";
-		$out.= "		), \n";
-		$out.= "		'rules'=>array \n";
-		$out.= "		( \n";
-		$out.= "			array \n";
-		$out.= "			( \n";
-		$out.= "				'ruleType'=>new RequiredRule('field1','field2 is required'), \n";
-		$out.= "				'processingCommand'=>IInputProcessor::PROCESS_STOP \n";
-		$out.= "			), \n";
-		$out.= "			array \n";
-		$out.= "			( \n";
-		$out.= "				'ruleType'=>new LengthRule('field1','field2 should be 10 chars or less',0,10), \n";
-		$out.= "				'processingCommand'=>IInputProcessor::PROCESS_CONTINUE \n";
-		$out.= "			) \n";
-		$out.= "		), \n";
-		$out.= "	), \n";
-		$out.= "	'field2'=>array \n";
-		$out.= "	( \n";
-		$out.= "		'name'=>'field2', \n";
-		$out.= "		'filters'=>array \n";
-		$out.= "		( \n";
-		$out.= "			new TrimFilter('field2') \n";
-		$out.= "		), \n";
-		$out.= "		'rules'=>array \n";
-		$out.= "		( \n";
-		$out.= "			array \n";
-		$out.= "			( \n";
-		$out.= "				'ruleType'=>new RequiredRule('field2','field2 is required'), \n";
-		$out.= "				'processingCommand'=>IInputProcessor::PROCESS_CONTINUE \n";
-		$out.= "			) \n";
-		$out.= "		) \n";
-		$out.= "	) \n";
-		$out.= "); \n"; 
-		*/
 		$out = '$def[\'field1\'][\'name\'] = \'forename\';' ."\n";
 		$out.= '$def[\'field1\'][\'filters\'] = array(new TrimFilter(\'forename\'));' ."\n";
 		$out.= '$def[\'field1\'][\'rules\'][0][\'ruleType\'] = new RequiredRule(\'forename\',\'forename is required\');' ."\n";

@@ -39,14 +39,10 @@ class TmUpdateQuery extends TmWhereQuery {
 	 * @return TmUpdateQuery returns a pointer to $this
 	 */
 	function set($column, $val) {
-		if(is_string($val)) {
+		if(is_string($val) && !$this->hasBinding($val)) {
 			$val = $this->db->quote($val);
-			$this->values[$column] = $val;	
 		}
-		else
-		{
-			$this->values[$column] = $val;
-		}
+		$this->values[$column] = $val;
 		return $this;
 	}
 	/**

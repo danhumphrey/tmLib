@@ -79,7 +79,7 @@ class TestOfWhereQuery extends UnitTestCase  {
 		$q->where($c->eq('col1','dan'));
 		$q->limit(10,2);
 		$s = $q->getSql();
-		$this->assertEqual(' WHERE col1 = dan LIMIT 10 OFFSET 2',$s);
+		$this->assertEqual(' WHERE col1 = dan LIMIT 10, 2',$s);
 	}
 }
 //run if standalone

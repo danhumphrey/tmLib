@@ -173,7 +173,7 @@ class TestOfSelectQuery extends UnitTestCase  {
 		$q = new TmSelectQuery($this->db);
 		$q->select('col1, col2')->from('Table1')->from('Table2')->where($q->criteria()->eq('col1','dan'))->groupBy('col1')->orderBy('col1')->limit(10,2);
 		$s = $q->getSql();
-		$this->assertEqual('SELECT col1, col2 FROM Table1, Table2 WHERE col1 = dan GROUP BY col1 ORDER BY col1 ASC LIMIT 10 OFFSET 2',$s);
+		$this->assertEqual('SELECT col1, col2 FROM Table1, Table2 WHERE col1 = dan GROUP BY col1 ORDER BY col1 ASC LIMIT 10, 2',$s);
 	}
 
 	function testSubSelectReturn() {

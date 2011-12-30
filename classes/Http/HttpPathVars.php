@@ -42,7 +42,7 @@ class HttpPathVars {
      * @throws Exception
      */
     private function validate() {
-    	if (!strstr($_SERVER['REQUEST_URI'],$this->baseUrl))
+        if (!strstr($_SERVER['REQUEST_URI'],$this->baseUrl))
         {
             throw new Exception('$baseUrl is invalid: '.$this->baseUrl );
         }
@@ -70,23 +70,33 @@ class HttpPathVars {
     * @access private
     */
     private function parseFragment () {
+        
         if ( strstr ($this->fragment,'/') ) {
             $vars=explode('/',$this->fragment);
             foreach ($vars as $var) {
-                if ( $var == '' )
+                if ( $var == '' ){
                     continue;
-                if ( strstr ($var,'=') )
+                }
+                if ( strstr ($var,'=') ){
                     continue;
-                if ( strstr ($var,'&') )
+                }
+                if ( strstr ($var,'&') ){
                     continue;
-                if ( strstr ($var,'?') )
+                }
+                    
+                if ( strstr ($var,'?') ){
                     continue;
+                }
+                    
                 $this->pathVars[]=$var;
             }
         }
         else
-        {
-        	$this->pathVars[]=$this->fragment;
+        {   
+            $fc = substr($this->fragment, 0 ,1);
+            if($fc !== '?' && $fc !== '#'){
+                 $this->pathVars[]=$this->fragment; 
+            } 
         }
     }
 

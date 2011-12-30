@@ -148,6 +148,11 @@ abstract class TmQuery {
 		return $valueName;
 	}
 	
+	function hasBinding(&$value){
+		if(array_key_exists($value, $this->boundValues) || array_key_exists($value, $this->boundParams)){
+			return true;
+		}
+	}
 	private function prepareBindings($stmt) {
 		foreach ( $this->boundValues as $key => &$val ){
 			$stmt->bindValue( $key, $val );
