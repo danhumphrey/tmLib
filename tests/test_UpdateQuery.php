@@ -46,7 +46,7 @@ class TestOfUpdateQuery extends UnitTestCase  {
 		$c = $q->criteria();
 		$q->update('Test1')->set('col1','val1')->where($c->eq('col1','val0'))->limit(10,2);
 		$s = $q->getSql();
-		$this->assertEqual('UPDATE Test1 SET col1 = \'val1\' WHERE col1 = val0 LIMIT 10 OFFSET 2',$s);
+		$this->assertEqual('UPDATE Test1 SET col1 = \'val1\' WHERE col1 = val0 LIMIT 10, 2',$s);
 	}
 
 }

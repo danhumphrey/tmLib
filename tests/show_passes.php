@@ -1,12 +1,11 @@
 <strong><?php
-    if (! defined('SIMPLE_TEST')) {
-       define('SIMPLE_TEST', 'C:\\web\\simpletest\\');
-    }
+    //tests includes
+	require_once('test-includes.php');
     require_once(SIMPLE_TEST . 'reporter.php');
     require_once('my_reporter.php');
-    
+
 class ShowPasses extends MyReporter {
-    
+
     function ShowPasses() {
         $this->HtmlReporter();
     }
@@ -19,6 +18,6 @@ class ShowPasses extends MyReporter {
         print '<td nowrap>'.implode("-&gt;", $breadcrumb).'</td>';
         print '<td nowrap>'."-&gt;$message</td></tr></table>\n";
     }
-    
+
 }
 ?>

@@ -43,7 +43,7 @@ class OneRequiredRule extends BaseRule
 		foreach($this->fields as $field)
 		{
 			$val = $dataSet->get($field);
-			if(!empty($val))
+			if(isset($val))
 			{
 				return true;
 			}

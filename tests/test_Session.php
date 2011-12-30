@@ -110,6 +110,33 @@ class TestOfSession extends UnitTestCase {
 		$this->session->removeArrayKey('test','arrayKey');
 		$this->assertEqual($this->session->get('test'),array('arrayKey2'=>'testValue2'),'session key `test`=>`arrayKey` should not exist: %s');
 	}
+	
+	function testGetAndRemove(){
+       $key = 'getAndRemoveKey';
+       $val = 'ABC';
+       $_SESSION[$key] = $val;
+       $test = $this->session->getAndRemove($key);
+       $this->assertEqual($test, $val);
+       $test2 = $this->session->get($key);
+       $this->assertNull($test2, 'session key not removed with getAndRemove method');
+    }
+	
+	function testGetArrayKeyAndRemove(){
+       $key = 'getAndRemoveArrayKey';
+       $arrayKey = 'getArrayKeyAndRemoveArrayKey';	   
+	   $val = 'ABC';
+	   $arrayKey = 'getArrayKeyAndRemoveArrayKey2';
+	   $val2 = 'DEF';
+	   $_SESSION[$key] = array($arrayKey=>$val,$arrayKey2=>$val2 );
+	   
+       $test = $this->session->getArrayKeyAndRemove($key, $arrayKey);
+       $this->assertEqual($test, $val);
+       $test2 = $this->session->getArrayKey($key, $arrayKey);
+       $this->assertNull($test2, 'session array key not removed with getAndRemove method');
+	   //ensure other keys not removed
+	   $test3 = $this->session->getArrayKey($key, $arrayKey2);
+	   $this->assertEqual($test3, $val2); 
+    }
 }
 //run if standalone
 if(!isset($this)) {

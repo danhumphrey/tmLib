@@ -28,7 +28,7 @@ class InputProcessor implements IInputProcessor {
 	
 	/**
 	 * Constructs the InputProcessor
-	 * @param object BaseCommand a command implementing state methods
+	 * @param object $stateListener an object implementing the ICommandState interface
 	 * @param string $triggerVar (optional) the name of the variable that triggers the process
 	 * @param string $triggerValue (optional) the value of the triggerVar variable that triggers the process
 	 */

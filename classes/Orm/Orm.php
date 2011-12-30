@@ -1,7 +1,7 @@
 <?php
 /**
   * Orm class
-  * 
+  *
   * @package tmLib
   * @subpackage Orm
   * @author Dan Humphrey <dan.humphrey@technomedia.co.uk>
@@ -9,7 +9,7 @@
 
 /**
  * Orm provides object relational mapping between a class and a database table
- * 
+ *
  * @package tmLib
  * @subpackage Orm
  * @author Dan Humphrey <dan.humphrey@technomedia.co.uk>
@@ -35,7 +35,7 @@ class Orm {
         $this->db = $db;
         $this->defParser = $defParser;
     }
-    
+
     /**
      * Loads an object from database based on the id
      *
@@ -58,21 +58,21 @@ class Orm {
         }
         //build select query
         $q = $this->db->createSelectQuery();
-        $q->select('*')->from($def->getTable())->where($q->criteria()->eq($idColumn,$id))->limit(1);
+        $q->select('*')->from($def->getTable())->where($q->criteria()->eq($idColumn,$this->db->quote($id)))->limit(1);
         $s = $q->prepare();
         $s->execute();
         $this->validateStatement($s);
-        
+
         $ret = $this->createOrmObject($className,$s,$def);
         $classObject = $ret[0];
         return $classObject;
     }
-    
+
     /**
      * Creates an OrmObject from a recordset
      *
      * @param string $className the classname of the object you wish to create
-     * @param PDOStatement $s a statement to populate the object from 
+     * @param PDOStatement $s a statement to populate the object from
      * @param OrmDefinition $def (optional) a definition object for the class
      * @see Orm::findByQuery
      * @return OrmObject returns an OrmObject created from the recordset
@@ -83,7 +83,7 @@ class Orm {
             $s->execute();
             $this->validateStatement($s);
         }
-        
+
         //parse definition if needed
         if($def === null) {
             $def = $this->defParser->parse($className);
@@ -92,7 +92,7 @@ class Orm {
         $columns = $def->getColumns();
         $ret = array();
         //get each property name and column definition and set the property of the class from the statement
-        while($row = $s->fetch(PDO::FETCH_ASSOC)) 
+        while($row = $s->fetch(PDO::FETCH_ASSOC))
         {
             $obj = new $className();
             foreach($columns as $prop => $column) {
@@ -108,7 +108,7 @@ class Orm {
             return false;
         }
     }
-    
+
     /**
      * Creates a find query object for use with findByQuery()
      *
@@ -125,11 +125,11 @@ class Orm {
         $cols = array();
         foreach($columns as $column) {
             $q->select($table.'.'.$column['name']. ' as '.$column['name']);
-        }   
+        }
         $q->from($table);
         return $q;
     }
-    
+
     /**
      * Returns an array of OrmObject(s) by clasName that where loaded from the database with a find query
      *
@@ -143,11 +143,11 @@ class Orm {
         $s->execute();
         $this->validateStatement($s);
         if($ret = $this->createOrmObject($className,$s)) {
-            return $ret;    
+            return $ret;
         }
         return array();
     }
-    
+
     /**
      * Saves a newly created OrmObject to the database
      *
@@ -172,14 +172,16 @@ class Orm {
                 //get value
                 $getFunc = "get$prop";
                 $val = $obj->$getFunc();
-                //int?
-                if(strtolower($column['type']) =='int') {
-                    $q->set($column['name'],intval($val));
+                switch (strtolower($column['type'])){
+                	case 'int':
+                		$q->set($column['name'],intval($val));
+                		break;
+                	case 'float':
+                		$q->set($column['name'],floatval($val));
+                		break;
+                	default:
+                		$q->set($column['name'],$val);
                 }
-                else {
-                    $q->set($column['name'],$val);
-                }
-
             }
         }
         $res = $this->db->exec($q->getSql());
@@ -193,20 +195,8 @@ class Orm {
             return $id;
         }
         return false;
-        
-        //$s = $q->prepare();
-        //$s->execute();
-        //$this->validateStatement($s);
-        //if($s->rowCount())
-        //{
-        //  +$id = $this->db->lastInsertId();
-        //  $obj->setId($id);
-        //  return $id;
-        //} else {
-        //  return false;
-        //}
     }
-    
+
     /**
      * Updates an existing OrmObject and saves the data to the database
      *
@@ -230,12 +220,15 @@ class Orm {
                 //get value
                 $getFunc = "get$prop";
                 $val = $obj->$getFunc();
-                //int?
-                if(strtolower($column['type']) =='int') {
-                    $q->set($column['name'],intval($val));
-                }
-                else {
-                    $q->set($column['name'],$val);
+            	switch (strtolower($column['type'])){
+                	case 'int':
+                		$q->set($column['name'],intval($val));
+                		break;
+                	case 'float':
+                		$q->set($column['name'],floatval($val));
+                		break;
+                	default:
+                		$q->set($column['name'],$val);
                 }
             }
             else {
@@ -243,7 +236,7 @@ class Orm {
             }
         }
         $q->where($q->criteria()->eq($idColumn,$obj->getId()));
-        //$s = $q->prepare();
+
         $res = $this->db->exec($q->getSql());
         if($this->db->errorCode() > 0) {
             $err = $this->db->errorInfo();
@@ -252,12 +245,8 @@ class Orm {
         if($res ==1){
             return true;
         }
-        //$this->validateStatement($s);
-        //if($s->rowCount() == 1) {
-            //return true;
-        //}
     }
-    
+
     /**
      * Saves or updates an OrmObject to the database
      *
@@ -292,10 +281,10 @@ class Orm {
      */
     function deleteById($className, $id) {
         $def = $this->defParser->parse($className);
-        
+
         //delete relations?
         $this->deleteRelated($def, $id);
-        
+
         //get columns from def
         $columns = $def->getColumns();
         foreach($columns as $column) {
@@ -306,12 +295,12 @@ class Orm {
         }
         //build delete query
         $q = $this->db->createDeleteQuery();
-        $q->deleteFrom($def->getTable())->where($q->criteria()->eq($idColumn,$id));
+        $q->deleteFrom($def->getTable())->where($q->criteria()->eq($idColumn,$this->db->quote($id)));
         $s = $q->prepare();
         $s->execute();
         $this->validateStatement($s);
 
-    
+
         if($s->rowCount() == 1) {
             return true;
         }
@@ -351,7 +340,7 @@ class Orm {
             return true;
         }
     }
-    
+
     private function deleteRelated($def, $id) {
         $obj = $this->load($def->getClass(),$id);
         foreach($def->getRelations() as $relation) {
@@ -375,15 +364,16 @@ class Orm {
             }
         }
     }
-    
+
     /**
      * Gets related object(s) from the database as specified by the relations in the orm definition
      *
      * @param OrmObject $obj the main OrmObject
      * @param string $relClass the name of the related class to retrieve
+     * @param string $criteria (optional) optional criteria to filter the related objects
      * @return mixed an OrmObject for Single relations and an array of OrmObject(s) for List and Lookup relations
      */
-    function getRelated($obj,$relClass) {
+    function getRelated($obj,$relClass, $criteria = null) {
         $className = get_class($obj);
         $def = $this->defParser->parse($className);
         $rels = $def->getRelations();
@@ -398,11 +388,15 @@ class Orm {
             throw new Exception("Class '$className' does not have a relation defined for '$relClass'");
         }
         $relationDef = $this->defParser->parse($relClass);
-        return $this->loadRelated($obj,$relation,$relationDef);
+        return $this->loadRelated($obj,$relation,$relationDef, $criteria);
     }
 
-    private function loadRelated($obj,$relation,$relationDef) {
+    private function loadRelated($obj,$relation,$relationDef,$criteria) {
         $q = $this->db->createSelectQuery();
+        if(!is_null($criteria)){
+        	$q->where($criteria);
+        }
+
         $local = $relation['localProperty'];
         $getFunc = "get$local";
         $localVal = ($obj->$getFunc()) ? $obj->$getFunc() : 0;
@@ -428,7 +422,7 @@ class Orm {
             case 'Lookup':
                 $related = array();
                 if($ret = $this->createOrmObject($relationDef->getClass(),$s)) {
-                    $related = $ret;    
+                    $related = $ret;
                 }
                 break;
         }
@@ -439,17 +433,17 @@ class Orm {
      * Adds a related object as specified by the relations in the orm definition. The related object is saved to the database
      *
      * @param OrmObject $obj the main OrmObject which must already exist in the database
-     * @param OrmObject $relatedObj the related OrmObject 
+     * @param OrmObject $relatedObj the related OrmObject
      * @return bool true if successful
      */
     function addRelated($obj,$relatedObj) {
         $className = get_class($obj);
         $className2 = get_class($relatedObj);
-        
+
         if($obj->getId() == null) {
             throw new Exception("Cannot add related objects to '$className' if it has not been saved");
         }
-        
+
         $def = $this->defParser->parse($className);
         $rels = $def->getRelations();
         $relation = null;
@@ -488,7 +482,7 @@ class Orm {
         }
         return false;
     }
-    
+
     /**
      * Removes a relation between objects as specified in the orm definition and updates the database.
      *
@@ -546,7 +540,7 @@ class Orm {
     private function validateStatement($s, $q = null) {
 
         if($s->errorCode() > 0) {
-            
+
             $err = $s->errorInfo();
             if(is_null($q))
             {
@@ -555,7 +549,7 @@ class Orm {
             else {
                 $msg  = $err[2] . ': ' . $q->getSql();
             }
-                
+
             throw new Exception($msg);
         }
     }

@@ -30,7 +30,7 @@ class TestOfDeleteQuery extends UnitTestCase  {
 		$c = $q->criteria();
 		$q->deleteFrom('Test1')->where($c->eq('col1','val0'))->limit(10,2);
 		$s = $q->getSql();
-		$this->assertEqual('DELETE FROM Test1 WHERE col1 = val0 LIMIT 10 OFFSET 2',$s);
+		$this->assertEqual('DELETE FROM Test1 WHERE col1 = val0 LIMIT 10, 2',$s);
 	}
 
 }

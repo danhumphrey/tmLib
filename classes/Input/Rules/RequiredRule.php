@@ -36,7 +36,7 @@ class RequiredRule extends BaseRule
 	function process($dataSet)
 	{
 		$val = $dataSet->get($this->fieldName);
-		if(empty($val))
+		if(!isset($val))
 		{
 			$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
 			$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
