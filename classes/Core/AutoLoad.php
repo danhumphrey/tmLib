@@ -60,6 +60,7 @@ class AutoLoad {
 			self::$cacheFile = $filePath;
 			return true;
 		}
+		throw new Exception('Cannot write to cache file ' . $filePath);
 	}
 	/**
 	 * loadClass attempts to autoload a class called className from the cache or the classPaths provided
