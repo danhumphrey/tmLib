@@ -1,30 +1,29 @@
 <?php
-class Test1Command extends BaseCommand  {
+class Test1Command extends BaseCommand implements ICommandState {
 	
 	function __construct() 
 	{
-		$this->inputProcessor = new InputProcessor($this,'Submit','doIt');
+		$this->inputProcessor = new InputProcessor($this,'Submit','doItx');
 		 //..and add some fields
-		/*
+		
 		$name = new InputField('forename');
-		$name->addFilter(new TrimFilter('forename'));
-		$name->addRule(new RequiredRule('forename','forename is required'),InputField::PROCESS_STOP);
-		$name->addRule(new LengthRule('forename','forename should be between 2 and 20 chars',2,20));
+		$name->addFilter(new TrimFilter());
+		$name->addRule(new RequiredRule('forename is required'),InputField::PROCESS_STOP);
+		$name->addRule(new LengthRule('forename should be between 2 and 20 chars',2,20));
 		$this->inputProcessor->addField($name);
 		
 		$surname = new InputField('surname');
-		$surname->addFilter(new TrimFilter('surname'));
-		$surname->addRule(new RequiredRule('surname','surname is required'),InputField::PROCESS_STOP);
+		$surname->addFilter(new TrimFilter());
+		$surname->addRule(new RequiredRule('surname is required'),InputField::PROCESS_STOP);
 		$this->inputProcessor->addField($surname);
-		*/
-		
 		//..load a field definition file
-		$this->inputProcessor->loadFieldDefinitions('FieldDefinitions/Test1Fields.php');
+		//$this->inputProcessor->loadFieldDefinitions('FieldDefinitions/Test1Fields.php');
 	}
 	
 	function execute($request,$response)
 	{
 		parent::execute($request, $response);
+		$this->inputProcessor->process($this->dataSet);
 	}
 	function stateInitAction() {
 		//initialise
