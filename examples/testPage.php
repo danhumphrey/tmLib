@@ -12,7 +12,7 @@ function __autoload($className) {
 $req = new HttpRequest();
 $res = new HttpResponse();
 
-$fc = new FrontController(new PageMapper('pages/'));
+$fc = new Dispatcher(new PageMapper('pages/'));
 
 if($fc->execute($req,$res))
 {

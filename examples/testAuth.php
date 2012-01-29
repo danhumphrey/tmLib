@@ -30,7 +30,7 @@ try {
 		exit;
 	}
 	//front controller
-	$fc = new FrontController(new PageMapper('pages/'));
+	$fc = new Dispatcher(new PageMapper('pages/'));
 	if($fc->execute($request,$response)) {
 		echo $response->execute();
 	}
