@@ -118,6 +118,8 @@ class Orm {
      */
     function createFindQuery($className) {
         $q = $this->db->createSelectQuery();
+       	$q->setClassName($className);
+       	
         $def = $this->defParser->parse($className);
         //get columns from def
         $columns = $def->getColumns();
@@ -134,15 +136,15 @@ class Orm {
      * Returns an array of OrmObject(s) by clasName that where loaded from the database with a find query
      *
      * @see Orm::createFindQuery
-     * @param string $className the classname of the OrmObject(s) being found by the query
      * @param TmSelectQuery $q the query object
+     * @param string optional $className the classname of the OrmObject(s) being found by the query
      * @return array an array of OrmObjects
      */
-    function findByQuery($className, $q) {
+    function findByQuery($q, $className = null) {
         $s = $q->prepare();
         $s->execute();
         $this->validateStatement($s);
-        if($ret = $this->createOrmObject($className,$s)) {
+        if($ret = $this->createOrmObject($className == null ? $q->getClassName() : $className,$s)) {
             return $ret;
         }
         return array();
