@@ -37,6 +37,8 @@ abstract class TmQuery {
 	
 	private $expression;
 	
+	private $className;
+	
 	/**
 	 * Constructs the Query class
 	 *
@@ -59,6 +61,24 @@ abstract class TmQuery {
 		return $this->sql;
 	}
 	
+	
+	/**
+	 * Sets the class name
+	 *
+	 * @param string $className the class name
+	 */
+	public function setClassName($className) {
+		$this->className = $className;
+	}
+	
+	/**
+	 * returns the class name
+	 *
+	 * @return string the class name
+	 */
+	public function getClassName() {
+		return $this->className;
+	}
 	/**
 	 * Returns the Query columns
 	 *

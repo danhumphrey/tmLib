@@ -925,7 +925,7 @@ class TestOfOrm extends UnitTestCase  {
 	function testFindByQuery() {
 		$orm = new Orm($this->db,new OrmAnnotationParser());
 		$q = $orm->createFindQuery('Article');
-		$list = $orm->findByQuery('Article',$q);
+		$list = $orm->findByQuery($q);
 		$this->assertEqual(sizeof($list), 3);
 		foreach($list as $art)
 		{
@@ -936,7 +936,7 @@ class TestOfOrm extends UnitTestCase  {
 		$orm = new Orm($this->db,new OrmAnnotationParser());
 		$q = $orm->createFindQuery('Article');
 		$q->where($q->criteria()->eq('id',99));
-		$list = $orm->findByQuery('Article',$q);
+		$list = $orm->findByQuery($q);
 		$this->assertEqual($list, array());
 	}
 	
