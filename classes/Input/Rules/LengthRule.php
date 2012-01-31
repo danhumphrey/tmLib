@@ -47,16 +47,14 @@ class LengthRule extends BaseRule{
 			if(!$this->min == null) {
 				if(strlen($val) < $this->min)
 				{
-					$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
-					$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
+					$this->setError($dataSet);
 					return false;
 				}
 			}
 			if(!$this->max == null) {
 				if(strlen($val) > $this->max)
 				{
-					$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
-					$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
+					$this->setError($dataSet);
 					return false;
 				}
 			}

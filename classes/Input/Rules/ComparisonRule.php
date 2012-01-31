@@ -38,8 +38,7 @@ class ComparisonRule extends BaseRule{
 	function process($dataSet)	{
 		if($val = $dataSet->get($this->fieldName)) {
 			if($val != $dataSet->get($this->comparisonField)){
-				$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
-				$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
+				$this->setError($dataSet);
 				return false;
 			}
 		}
