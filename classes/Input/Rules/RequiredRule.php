@@ -38,8 +38,7 @@ class RequiredRule extends BaseRule
 		$val = $dataSet->get($this->fieldName);
 		if(!isset($val))
 		{
-			$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
-			$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
+			$this->setError($dataSet);
 			return false;
 		}
 		return true;

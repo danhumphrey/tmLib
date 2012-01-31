@@ -40,8 +40,7 @@ class PatternRule extends BaseRule
 		if($val = $dataSet->get($this->fieldName)) {
 		// valid chars
     	if (!preg_match($this->pattern, $val)) {
-    			$dataSet->set($this->fieldName . 'Error', $this->errorMsg);
-    			$dataSet->setArrayKey('errors',$this->fieldName,$this->errorMsg);
+    			$this->setError($dataSet);
 				return false;
 			}
 		}
